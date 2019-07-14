@@ -24,8 +24,11 @@ def raj2jar(root, followlinks=False):
 
   for root, dirs, files in os.walk(root, followlinks=followlinks):
     for filename in files:
-      if filename.endswith(".raj"):
-        filename_new = filename[:-4] + ".jar"
+
+      (filename_root, filename_ext) = os.path.splitext(filename)
+
+      if filename_ext == ".raj":
+        filename_new = filename_root + ".jar"
         path_old = os.path.join(root, filename)
         path_new = os.path.join(root, filename_new)
         logging.info("Renaming {path_old} into {path_new}...")
