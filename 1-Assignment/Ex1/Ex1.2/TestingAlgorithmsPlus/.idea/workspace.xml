@@ -2,15 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b9089599-1ec5-4767-95bf-b35e35b057d7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TestingAlgorithmsPlus.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Annotations/Decrypt.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Annotations/Encrypt.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Registry/KeyRegistry.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Test/TestAlgsPlus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Ex1.1/TestingAlgorithms/src/Registry/KeyRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Ex1.1/TestingAlgorithms/src/Registry/KeyRegistry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Ex1.1/TestingAlgorithms/src/Test/TestAlgs.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Ex1.1/TestingAlgorithms/src/Test/TestAlgs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Annotations/Decrypt.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Annotations/Encrypt.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Registry/KeyRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Registry/KeyRegistry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Test/TestAlgsPlus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Test/TestAlgsPlus.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -57,6 +55,26 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="TestAlgsPlus" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Test.TestAlgsPlus" />
+      <module name="TestingAlgorithmsPlus" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.TestAlgsPlus" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -67,7 +85,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1578503814783</updated>
-      <workItem from="1578503819651" duration="217000" />
+      <workItem from="1578503819651" duration="823000" />
+      <workItem from="1578728898458" duration="13000" />
+      <workItem from="1578768978985" duration="2006000" />
     </task>
     <servers />
   </component>
@@ -79,7 +99,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
