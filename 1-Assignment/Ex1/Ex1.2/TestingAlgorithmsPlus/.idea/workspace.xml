@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b9089599-1ec5-4767-95bf-b35e35b057d7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Ex1.1/TestingAlgorithms/src/Registry/KeyRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Ex1.1/TestingAlgorithms/src/Registry/KeyRegistry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Ex1.1/TestingAlgorithms/src/Test/TestAlgs.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Ex1.1/TestingAlgorithms/src/Test/TestAlgs.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Annotations/Decrypt.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Annotations/Encrypt.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Registry/KeyRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Registry/KeyRegistry.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Test/TestAlgsPlus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Test/TestAlgsPlus.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -88,6 +83,7 @@
       <workItem from="1578503819651" duration="823000" />
       <workItem from="1578728898458" duration="13000" />
       <workItem from="1578768978985" duration="2006000" />
+      <workItem from="1578816509630" duration="2566000" />
     </task>
     <servers />
   </component>

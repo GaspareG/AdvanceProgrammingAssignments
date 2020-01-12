@@ -32,9 +32,10 @@ public class TestAlgs {
   private static final String PATH_SECRET_LIST = "crypto/secret.list";
   private static final String PATH_KEY_LIST = "crypto/keys.list";
   private static final String PATH_CRYPTO_ALGOS = "crypto/algos";
-  private static String PATH_BASE;
 
   public static void main(String[] args) throws Exception {
+
+    String PATH_BASE;
 
     if (args.length == 0) {
       PATH_BASE = "/home/gaspare/git/AdvanceProgrammingAssignments/1-Assignment/Ex1/";
@@ -57,7 +58,7 @@ public class TestAlgs {
    * @param folder      Path of the folder where .class files are located
    * @param secret      Path of the file containing the strings to test
    */
-  public static void checkClasses(ClassLoader classLoader, KeyRegistry registry, String packageName, String folder, String secret) {
+  private static void checkClasses(ClassLoader classLoader, KeyRegistry registry, String packageName, String folder, String secret) {
     try {
       List<String> secretLines = getFileLines(secret);
       // For each file in the folder
@@ -80,7 +81,7 @@ public class TestAlgs {
    * @param packageName Prefix of the package name for the class
    * @param secret      List of string to test for encryption and decryption
    */
-  public static void checkClass(Path path, ClassLoader classLoader, KeyRegistry registry, String packageName, List<String> secret) {
+  private static void checkClass(Path path, ClassLoader classLoader, KeyRegistry registry, String packageName, List<String> secret) {
 
     try {
 
@@ -112,7 +113,7 @@ public class TestAlgs {
    * @param key    Key to use for the constructor
    * @param secret List of string to test for encryption and decryption
    */
-  public static void testClass(Class loaded, String key, List<String> secret) {
+  private static void testClass(Class loaded, String key, List<String> secret) {
     try {
 
       // Get constructor and create a new class instance
@@ -143,7 +144,7 @@ public class TestAlgs {
    * @param d Decrypted word
    * @return true if the two strings are the same without padding, false otherwise
    */
-  public static boolean checkUnpadded(String w, String d) {
+  private static boolean checkUnpadded(String w, String d) {
     // w is a prefix of d
     if (!d.startsWith(w)) return false;
     // followed by only PADDING_CHAR characters
@@ -157,7 +158,7 @@ public class TestAlgs {
    * @param path Base path for the ClassLoader
    * @return A ClassLoader with the specified path
    */
-  public static ClassLoader getClassLoader(String path) {
+  private static ClassLoader getClassLoader(String path) {
     File file = new File(path);
     ClassLoader classLoader = null;
 
@@ -177,7 +178,7 @@ public class TestAlgs {
    * @param path        the path of file to read for the classes
    * @return a KeyRegistry containing all the pairs class/key found in the path
    */
-  public static KeyRegistry loadRegistry(ClassLoader classLoader, String path) {
+  private static KeyRegistry loadRegistry(ClassLoader classLoader, String path) {
     KeyRegistry registry = new KeyRegistry();
 
     List<String> keyLines = getFileLines(path);
@@ -210,7 +211,7 @@ public class TestAlgs {
    * @param toVerify Class to verify
    * @return true is the specified class is an encryption class, false otherwise
    */
-  public static boolean isEncryptionAlgorithm(Class toVerify) {
+  private static boolean isEncryptionAlgorithm(Class toVerify) {
     // Public constructor
     boolean checkConstructor = hasStringConstructor(toVerify);
 
@@ -226,7 +227,7 @@ public class TestAlgs {
    * @param toVerify Class to verify
    * @return true if the class as a constructor with a single string parameter, false otherwise
    */
-  public static boolean hasStringConstructor(Class toVerify) {
+  private static boolean hasStringConstructor(Class toVerify) {
     boolean check = true;
     try {
       toVerify.getConstructor(String.class);
@@ -241,9 +242,9 @@ public class TestAlgs {
    * @param prefix   Prefix of methods to search
    * @return List of methods that start with the specified prefix
    */
-  public static List<Method> getMethodsStartWith(Class toVerify, String prefix) {
+  private static List<Method> getMethodsStartWith(Class toVerify, String prefix) {
     // Stream with all the class methods
-    List<Method> methods = Arrays.stream(toVerify.getMethods())
+    return Arrays.stream(toVerify.getMethods())
         // Filter only methods with one parameter
         .filter(m -> m.getParameterCount() == 1)
         // Filter only methods with string parameter
@@ -252,15 +253,14 @@ public class TestAlgs {
         .filter(m -> m.getName().startsWith(prefix))
         // Collect stream to list
         .collect(Collectors.toList());
-    return methods;
   }
 
   /**
    * @param path the path of the file to read
    * @return List of lines in the specified path
    */
-  public static List<String> getFileLines(String path) {
-    List<String> lines = new ArrayList<String>();
+  private static List<String> getFileLines(String path) {
+    List<String> lines = new ArrayList<>();
 
     try {
       BufferedReader reader = new BufferedReader(new FileReader(path));
@@ -269,8 +269,6 @@ public class TestAlgs {
         lines.add(line);
         line = reader.readLine();
       }
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
     } catch (IOException e) {
       e.printStackTrace();
     }

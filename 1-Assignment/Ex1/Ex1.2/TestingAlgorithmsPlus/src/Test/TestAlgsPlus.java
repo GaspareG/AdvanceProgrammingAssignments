@@ -33,9 +33,10 @@ public class TestAlgsPlus {
   private static final String PATH_SECRET_LIST = "crypto/secret.list";
   private static final String PATH_KEY_LIST = "crypto/keys.list";
   private static final String PATH_CRYPTO_ALGOS = "crypto/algos";
-  private static String PATH_BASE;
 
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
+
+    String PATH_BASE;
 
     if (args.length == 0) {
       PATH_BASE = "/home/gaspare/git/AdvanceProgrammingAssignments/1-Assignment/Ex1/";
@@ -58,7 +59,7 @@ public class TestAlgsPlus {
    * @param folder      Path of the folder where .class files are located
    * @param secret      Path of the file containing the strings to test
    */
-  public static void checkClasses(ClassLoader classLoader, KeyRegistry registry, String packageName, String packageAnnotation, String folder, String secret) {
+  private static void checkClasses(ClassLoader classLoader, KeyRegistry registry, String packageName, String packageAnnotation, String folder, String secret) {
     try {
       List<String> secretLines = getFileLines(secret);
 
@@ -74,9 +75,7 @@ public class TestAlgsPlus {
           .filter(path -> path.toString().endsWith(".class"))
           // For each .class file check it
           .forEach(path -> TestAlgsPlus.checkClass(path, classLoader, registry, packageName, secretLines, encryptionAnnotation, decryptionAnnotation));
-    } catch (IOException e) {
-      e.printStackTrace();
-    } catch (ClassNotFoundException e) {
+    } catch (IOException | ClassNotFoundException e) {
       e.printStackTrace();
     }
   }
@@ -88,7 +87,7 @@ public class TestAlgsPlus {
    * @param packageName Prefix of the package name for the class
    * @param secret      List of string to test for encryption and decryption
    */
-  public static void checkClass(Path path, ClassLoader classLoader, KeyRegistry registry, String packageName, List<String> secret, Class encryptionAnnotation, Class decryptionAnnotation) {
+  private static void checkClass(Path path, ClassLoader classLoader, KeyRegistry registry, String packageName, List<String> secret, Class encryptionAnnotation, Class decryptionAnnotation) {
 
     try {
 
@@ -120,7 +119,7 @@ public class TestAlgsPlus {
    * @param key    Key to use for the constructor
    * @param secret List of string to test for encryption and decryption
    */
-  public static void testClass(Class loaded, String key, List<String> secret, Class encryptionAnnotation, Class decryptionAnnotation) {
+  private static void testClass(Class loaded, String key, List<String> secret, Class encryptionAnnotation, Class decryptionAnnotation) {
     try {
 
       // Get constructor and create a new class instance
@@ -128,17 +127,20 @@ public class TestAlgsPlus {
       Object crypto = constructor.newInstance(key);
 
       // Get encryption and decryption methods
-      Method encryption = null;
-      Method decryption = null;
+      Method encryption;
+      Method decryption;
 
       if (hasAnnotations(loaded, encryptionAnnotation, decryptionAnnotation)) {
+        // Retrieve methods using annotations
         encryption = getMethodsAnnotated(loaded, encryptionAnnotation).get(0);
         decryption = getMethodsAnnotated(loaded, decryptionAnnotation).get(0);
       } else {
+        // Retrieve methods using name
         encryption = getMethodsStartWith(loaded, "enc").get(0);
         decryption = getMethodsStartWith(loaded, "dec").get(0);
       }
 
+      // For each secret word
       for (String w : secret) {
 
         // Try to do decryption(encryption(w))
@@ -159,7 +161,7 @@ public class TestAlgsPlus {
    * @param d Decrypted word
    * @return true if the two strings are the same without padding, false otherwise
    */
-  public static boolean checkUnpadded(String w, String d) {
+  private static boolean checkUnpadded(String w, String d) {
     // w is a prefix of d
     if (!d.startsWith(w)) return false;
     // followed by only PADDING_CHAR characters
@@ -173,7 +175,7 @@ public class TestAlgsPlus {
    * @param path Base path for the ClassLoader
    * @return A ClassLoader with the specified path
    */
-  public static ClassLoader getClassLoader(String path) {
+  private static ClassLoader getClassLoader(String path) {
     File file = new File(path);
     ClassLoader classLoader = null;
 
@@ -193,7 +195,7 @@ public class TestAlgsPlus {
    * @param path        the path of file to read for the classes
    * @return a KeyRegistry containing all the pairs class/key found in the path
    */
-  public static KeyRegistry loadRegistry(ClassLoader classLoader, String path) {
+  private static KeyRegistry loadRegistry(ClassLoader classLoader, String path) {
     KeyRegistry registry = new KeyRegistry();
 
     List<String> keyLines = getFileLines(path);
@@ -219,22 +221,32 @@ public class TestAlgsPlus {
    * Check if a class is an encryption algorithm
    * A class is an encryption algorithm if it has:
    * (1) a public constructor
-   * (2) a method starting with enc
-   * (3) a method starting with dec
+   * (2) One of:
+   * (2.a) a method starting with enc
+   * (2.a) a method with the @Encrypt annotation
+   * (3) One of:
+   * (3.a) a method starting with dec
+   * (3.a) a method with the @Decrypt annotation
    * all three with one String parameter.
    *
-   * @param toVerify Class to verify
+   * @param toVerify          Class to verify
+   * @param encryptAnnotation Class for the encryption annotation
+   * @param decryptAnnotation Class for the decryption annotation
    * @return true is the specified class is an encryption class, false otherwise
    */
-  public static boolean isEncryptionAlgorithm(Class toVerify, Class encryptAnnotation, Class decryptAnnotation) {
+  private static boolean isEncryptionAlgorithm(Class toVerify, Class encryptAnnotation, Class decryptAnnotation) {
     // Public constructor
     boolean checkConstructor = hasStringConstructor(toVerify);
-
+    // Annotations of Methods
     boolean checkMethods = hasAnnotations(toVerify, encryptAnnotation, decryptAnnotation) || hasMethods(toVerify);
 
     return checkConstructor && checkMethods;
   }
 
+  /**
+   * @param toVerify Class in which verify the methods
+   * @return true if the specified class has both the enc and dec starting methods
+   */
   private static boolean hasMethods(Class toVerify) {
     // A method starting with enc
     boolean checkEncryption = getMethodsStartWith(toVerify, "enc").size() == 1;
@@ -245,6 +257,12 @@ public class TestAlgsPlus {
     return checkEncryption && checkDecryption;
   }
 
+  /**
+   * @param toVerify          Class in which verify the annotations
+   * @param encryptAnnotation Class for the encryption annotation
+   * @param decryptAnnotation Class for the decryption annotation
+   * @return true if the specified class has both the annotations, false otherwise
+   */
   private static boolean hasAnnotations(Class toVerify, Class encryptAnnotation, Class decryptAnnotation) {
     // A method starting with enc
     boolean checkEncryption = getMethodsAnnotated(toVerify, encryptAnnotation).size() == 1;
@@ -255,12 +273,11 @@ public class TestAlgsPlus {
     return checkEncryption && checkDecryption;
   }
 
-
   /**
    * @param toVerify Class to verify
    * @return true if the class as a constructor with a single string parameter, false otherwise
    */
-  public static boolean hasStringConstructor(Class toVerify) {
+  private static boolean hasStringConstructor(Class toVerify) {
     boolean check = true;
     try {
       toVerify.getConstructor(String.class);
@@ -275,9 +292,9 @@ public class TestAlgsPlus {
    * @param annotation Annotation class to search
    * @return List of methods with the specified annotation
    */
-  public static List<Method> getMethodsAnnotated(Class toVerify, Class annotation) {
+  private static List<Method> getMethodsAnnotated(Class toVerify, Class annotation) {
     // Stream with all the class methods
-    List<Method> methods = Arrays.stream(toVerify.getMethods())
+    return Arrays.stream(toVerify.getMethods())
         // Filter only methods with one parameter
         .filter(m -> m.getParameterCount() == 1)
         // Filter only methods with string parameter
@@ -286,7 +303,6 @@ public class TestAlgsPlus {
         .filter(m -> m.isAnnotationPresent(annotation))
         // Collect stream to list
         .collect(Collectors.toList());
-    return methods;
   }
 
   /**
@@ -294,9 +310,9 @@ public class TestAlgsPlus {
    * @param prefix   Prefix of methods to search
    * @return List of methods that start with the specified prefix
    */
-  public static List<Method> getMethodsStartWith(Class toVerify, String prefix) {
+  private static List<Method> getMethodsStartWith(Class toVerify, String prefix) {
     // Stream with all the class methods
-    List<Method> methods = Arrays.stream(toVerify.getMethods())
+    return Arrays.stream(toVerify.getMethods())
         // Filter only methods with one parameter
         .filter(m -> m.getParameterCount() == 1)
         // Filter only methods with string parameter
@@ -305,15 +321,14 @@ public class TestAlgsPlus {
         .filter(m -> m.getName().startsWith(prefix))
         // Collect stream to list
         .collect(Collectors.toList());
-    return methods;
   }
 
   /**
    * @param path the path of the file to read
    * @return List of lines in the specified path
    */
-  public static List<String> getFileLines(String path) {
-    List<String> lines = new ArrayList<String>();
+  private static List<String> getFileLines(String path) {
+    List<String> lines = new ArrayList<>();
 
     try {
       BufferedReader reader = new BufferedReader(new FileReader(path));
@@ -322,8 +337,6 @@ public class TestAlgsPlus {
         lines.add(line);
         line = reader.readLine();
       }
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
     } catch (IOException e) {
       e.printStackTrace();
     }
