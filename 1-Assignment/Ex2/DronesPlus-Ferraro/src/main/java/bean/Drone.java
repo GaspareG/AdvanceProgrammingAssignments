@@ -5,8 +5,6 @@ import java.io.Serializable;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import utility.Point;
 
 /**
@@ -15,18 +13,19 @@ import utility.Point;
  */
 public class Drone implements Serializable {
     
-    private Timer timer;
     private final PropertyChangeSupport propertySupport;
+    private final VetoableChangeSupport vetos;
     private boolean flying;
     private Point loc;
-    private VetoableChangeSupport vetos;
+    private Timer timer;
     
     // Grid constraint
+    private final int scale = 25;
     private final int minX = -10;
     private final int minY = -10;
     private final int maxX = +10;
     private final int maxY = +10;
-
+    
     public Drone()
     {
         this.propertySupport = new PropertyChangeSupport(this);
@@ -39,7 +38,13 @@ public class Drone implements Serializable {
     {
         this.timer = new Timer();
         this.setFlying(true);
-        this.setLocation(initLoc);
+        try
+        {
+            this.vetos.fireVetoableChange("location", this.getLocation(), initLoc);
+            this.setLocation(initLoc);
+        } catch (PropertyVetoException ex) {
+            this.setLocation(new Point(0,0));
+        }
         this.timer.schedule(new DroneTask(this), 0, 1000);
     }
     
@@ -51,22 +56,15 @@ public class Drone implements Serializable {
     
     private void setLocation(Point loc)
     {
-        try
-        {
-            this.vetos.fireVetoableChange("location", this.getLocation(), loc);
-            this.propertySupport.firePropertyChange("location", this.getLocation(), loc);
-            this.loc = loc;
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(Drone.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        this.propertySupport.firePropertyChange("location", this.getLocation(), loc);
+        this.loc = loc;
     }
     
     public Point getLocation()
     {
         return this.loc;
     }
-    
+        
     private void setFlying(boolean flying)
     {
         this.propertySupport.firePropertyChange("flying", this.getFlying(), flying);
@@ -102,7 +100,18 @@ public class Drone implements Serializable {
         Random rand = new Random();
         int x = rand.nextInt(maxX-minX+1)+minX;
         int y = rand.nextInt(maxY-minY+1)+minY;
-        this.setLocation(new Point(x, y));
+
+        x *= scale;
+        y *= scale;
+        
+        Point newLocation = new Point(x, y);
+        try {
+            this.vetos.fireVetoableChange("location", this.getLocation(), newLocation);
+            this.setLocation(newLocation);
+        } catch (PropertyVetoException ex) {  
+            
+        }
+        
     }
 
     private static class DroneTask extends TimerTask {
@@ -113,9 +122,23 @@ public class Drone implements Serializable {
             this.drone = drone;
         }
         
+        @Override
         public void run(){
             drone.setRandomLocation();
         }
     }
     
+    public String toString()
+    {
+        StringBuilder builder = new StringBuilder();
+        
+        builder.append(this.getFlying() ? ">" : "<");
+        builder.append(this.getLocation().getX());
+        builder.append(",");
+        builder.append(this.getLocation().getY());
+        builder.append(this.getFlying() ? "<" : ">");
+        builder.append(" ");
+        
+        return builder.toString();
+    }
 }

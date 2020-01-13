@@ -7,8 +7,6 @@ package gui;
 
 import bean.Drone;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
@@ -27,8 +25,6 @@ public class DroneButton extends JLabel implements PropertyChangeListener {
 
     private final JPanel panel;
     private Drone drone;
-    
-    public static final int SCALE_FACTOR = 25;
     
     public DroneButton(JPanel panel) {
                 
@@ -61,7 +57,6 @@ public class DroneButton extends JLabel implements PropertyChangeListener {
         });
     }
 
-    
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
          
@@ -80,6 +75,11 @@ public class DroneButton extends JLabel implements PropertyChangeListener {
         
     }
 
+    public Drone getDrone()
+    {
+        return this.drone;
+    }
+    
     private void randomForeground() {
         Random rand = new Random();
         
@@ -94,24 +94,15 @@ public class DroneButton extends JLabel implements PropertyChangeListener {
     {
         Point location = this.drone.getLocation();
         
-        int x = location.getX()*SCALE_FACTOR;
-        int y = location.getY()*SCALE_FACTOR;
+        int x = location.getX();
+        int y = location.getY();
 
         if(this.panel.contains(x, y))
             this.setBounds(x, y, 100, 25);
     }
     
     private void updateText() {
-        StringBuilder builder = new StringBuilder();
-        
-        builder.append(this.drone.getFlying() ? ">" : "<");
-        builder.append(this.drone.getLocation().getX());
-        builder.append(",");
-        builder.append(this.drone.getLocation().getY());
-        builder.append(this.drone.getFlying() ? "<" : ">");
-        builder.append(" ");
-        
-        this.setText(builder.toString());
+        this.setText(this.drone.toString());
     }
     
 }

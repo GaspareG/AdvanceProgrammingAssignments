@@ -5,11 +5,16 @@
  */
 package gui;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyVetoException;
+import java.beans.VetoableChangeListener;
+import utility.Point;
+
 /**
  *
  * @author gaspare
  */
-public class DroneFrame extends javax.swing.JFrame {
+public class DroneFrame extends javax.swing.JFrame implements VetoableChangeListener {
 
     /**
      * Creates new form DroneFrame
@@ -72,10 +77,11 @@ public class DroneFrame extends javax.swing.JFrame {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         DroneButton droneButton = new DroneButton(pnlDrones);
         
+        droneButton.getDrone().addVetoableChangeListener(this);
+
         pnlDrones.add(droneButton);
         pnlDrones.revalidate();
-        pnlDrones.repaint();     
-        
+        pnlDrones.repaint(); 
         
     }//GEN-LAST:event_btnAddActionPerformed
 
@@ -107,10 +113,8 @@ public class DroneFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DroneFrame().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new DroneFrame().setVisible(true);
         });
     }
 
@@ -118,4 +122,18 @@ public class DroneFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnAdd;
     private javax.swing.JPanel pnlDrones;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void vetoableChange(PropertyChangeEvent pce) throws PropertyVetoException {
+        if(pce.getPropertyName() != null && pce.getPropertyName().equals("location") )
+        {
+            Point newLocation = (Point) pce.getNewValue();
+            
+            if(!pnlDrones.contains(newLocation.getX(), newLocation.getY()))
+            {
+                throw new PropertyVetoException("Location ("+newLocation.getX() + " " + newLocation.getY()+") out of bounds", pce);
+            }
+        }
+    }
+    
 }
