@@ -84,13 +84,13 @@ public class DroneFrame extends javax.swing.JFrame implements VetoableChangeList
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         DroneButton droneButton = new DroneButton(pnlDrones);
-        
+
         droneButton.getDrone().addVetoableChangeListener(this);
 
         pnlDrones.add(droneButton);
         pnlDrones.revalidate();
-        pnlDrones.repaint(); 
-        
+        pnlDrones.repaint();
+
     }//GEN-LAST:event_btnAddActionPerformed
 
     /**
@@ -133,26 +133,23 @@ public class DroneFrame extends javax.swing.JFrame implements VetoableChangeList
 
     /**
      * Check if new location is in panel bound
+     *
      * @param pce PropertyChangeEvent
      * @throws PropertyVetoException
      */
     @Override
     public void vetoableChange(PropertyChangeEvent pce) throws PropertyVetoException {
-        if(pce.getPropertyName() != null && pce.getPropertyName().equals("location") )
-        {
+        if (pce.getPropertyName() != null && pce.getPropertyName().equals("location")) {
             Point location = (Point) pce.getNewValue();
-                    
-            int x = location.getX()*LABEL_WIDTH;
-            int y = location.getY()*LABEL_HEIGHT;
 
-            System.out.println("VETO CHECK " + x + " " + y);
-            
+            int x = location.getX() * LABEL_WIDTH;
+            int y = location.getY() * LABEL_HEIGHT;
+
             // If starting or ending points are not both in panel, throws veto
-            if(!pnlDrones.contains(x, y) || !pnlDrones.contains(x+LABEL_WIDTH, y+LABEL_HEIGHT))
-            {
-                throw new PropertyVetoException("Location ("+location.getX() + " " + location.getY()+") out of bounds", pce);
+            if (!pnlDrones.contains(x, y) || !pnlDrones.contains(x + LABEL_WIDTH, y + LABEL_HEIGHT)) {
+                throw new PropertyVetoException("Location (" + location.getX() + " " + location.getY() + ") out of bounds", pce);
             }
         }
     }
-    
+
 }

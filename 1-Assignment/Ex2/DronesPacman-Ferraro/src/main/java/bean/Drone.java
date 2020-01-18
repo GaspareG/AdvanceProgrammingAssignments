@@ -24,9 +24,24 @@ public class Drone implements Serializable, OutOfRangeListener {
     private Point loc;
 
     // Grid constraint
+    /**
+     * Minimum X value
+     */
     public static int minX = -10;
+
+    /**
+     * Minimum Y value
+     */
     public static int minY = -10;
+
+    /**
+     * Maximum X value
+     */
     public static int maxX = +10;
+
+    /**
+     * Maximum Y value
+     */
     public static int maxY = +10;
 
     /**
@@ -109,7 +124,8 @@ public class Drone implements Serializable, OutOfRangeListener {
 
     private void setRandomLocation() {
         Random rand = new Random();
-        // Generate 
+
+        // Generate next position
         int deltaX = 0;
         int deltaY = 0;
 
@@ -129,6 +145,12 @@ public class Drone implements Serializable, OutOfRangeListener {
                 break;
         }
 
+        /*
+            25% -> (+1, +0)     Left
+            25% -> (-1, +0)     Right
+            25% -> (+0, +1)     Bottom
+            25% -> (+0, +-1)    Right
+         */
         int x = this.getLocation().getX() + deltaX;
         int y = this.getLocation().getY() + deltaY;
 
@@ -169,23 +191,24 @@ public class Drone implements Serializable, OutOfRangeListener {
         return builder.toString();
     }
 
+    /**
+     *
+     * @param evt
+     */
     @Override
     public void OutOfRange(OutOfRangeEvent evt) {
         int x = evt.getX();
         int y = evt.getY();
 
-        System.out.println("OUT OF RANGE " + x + " " + y);
-
         if (x < 0) {
             x = Drone.maxX;
-        }
-        if (y < 0) {
-            y = Drone.maxY;
-        }
-        if (x > Drone.maxX) {
+        } else if (x > Drone.maxX) {
             x = 0;
         }
-        if (y > Drone.maxY) {
+
+        if (y < 0) {
+            y = Drone.maxY;
+        } else if (y > Drone.maxY) {
             y = 0;
         }
 

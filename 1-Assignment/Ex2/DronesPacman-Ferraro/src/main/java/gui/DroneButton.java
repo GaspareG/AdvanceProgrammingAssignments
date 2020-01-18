@@ -1,7 +1,6 @@
 package gui;
 
 import bean.Drone;
-import event.OutOfRangeEvent;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
@@ -23,11 +22,25 @@ public class DroneButton extends JLabel implements PropertyChangeListener {
     private final JPanel panel;
     private Drone drone;
 
-    // Scale to label size (othersize coordinate from -10 to 10 are too small)
+    /**
+     * fixed height of button
+     */
     public static final int LABEL_WIDTH = 75;
+
+    /**
+     * fixed height of button
+     */
     public static final int LABEL_HEIGHT = 75;
 
     /**
+     * Default empty constructor
+     */
+    public DroneButton() {
+        this(null);
+    }
+
+    /**
+     * Initialize DroneButton and its drone
      *
      * @param panel
      */
@@ -93,10 +106,14 @@ public class DroneButton extends JLabel implements PropertyChangeListener {
         this.setForeground(new Color(r, g, b));
     }
 
+    /**
+     *
+     */
     public void updateLocation() {
 
         Point location = this.drone.getLocation();
 
+        // Scale to label size (othersize coordinate from -10 to 10 are too small)
         int x = location.getX() * LABEL_WIDTH;
         int y = location.getY() * LABEL_HEIGHT;
 
@@ -110,6 +127,10 @@ public class DroneButton extends JLabel implements PropertyChangeListener {
         this.setText(this.drone.toString());
     }
 
+    /**
+     *
+     * @return
+     */
     public Drone getDrone() {
         return this.drone;
     }

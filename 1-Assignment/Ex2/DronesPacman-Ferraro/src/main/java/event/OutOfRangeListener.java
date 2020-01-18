@@ -1,18 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package event;
 
 import java.util.EventListener;
 
 /**
  *
- * @author gaspare
+ * @author Gaspare Ferraro - 520549 - <ferraro@gaspa.re>
  */
 public interface OutOfRangeListener extends EventListener {
 
+    /**
+     *
+     * @param evt OutOfRangeEvent event
+     */
     public void OutOfRange(OutOfRangeEvent evt);
 
 }

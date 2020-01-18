@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
 import bean.Drone;
@@ -17,12 +12,18 @@ import utility.Point;
 
 /**
  *
- * @author gaspare
+ * @author Gaspare Ferraro - 520549 - <ferraro@gaspa.re>
  */
 public class DronePanel extends JPanel {
 
+    /**
+     * list of EventListener
+     */
     protected EventListenerList listenerList;
 
+    /**
+     * Create a JPanel that keep tracks of DroneButton children
+     */
     public DronePanel() {
         this.listenerList = new EventListenerList();
 
@@ -63,14 +64,25 @@ public class DronePanel extends JPanel {
 
     }
 
+    /**
+     * Add new OutOfRangeListener
+     *
+     * @param listener
+     */
     public void addOutOfRangeListener(OutOfRangeListener listener) {
         listenerList.add(OutOfRangeListener.class, listener);
     }
 
+    /**
+     * Remove a OutOfRangeListener
+     *
+     * @param listener
+     */
     public void removeOutOfRangeListener(OutOfRangeListener listener) {
         listenerList.remove(OutOfRangeListener.class, listener);
     }
 
+    // Fire OutOfRangeEvent to all the OutOfRangeListener
     private void fireEvents(OutOfRangeEvent evt) {
         Object[] listeners = listenerList.getListenerList();
         for (int i = 0; i < listeners.length; i = i + 2) {
