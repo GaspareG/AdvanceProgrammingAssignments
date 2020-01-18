@@ -10,10 +10,7 @@ import event.OutOfRangeEvent;
 import event.OutOfRangeListener;
 import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
-import java.awt.event.HierarchyBoundsListener;
-import java.awt.event.HierarchyEvent;
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import javax.swing.JPanel;
 import javax.swing.event.EventListenerList;
 import utility.Point;
@@ -31,16 +28,24 @@ public class DronePanel extends JPanel {
 
         // I've tried everythings, that's the only "beatiful" thing that works
         this.addContainerListener(new ContainerListener() {
+
+            // Detect new component added to panel
             @Override
             public void componentAdded(ContainerEvent ce) {
+
+                // If added new DroneButton
                 if (ce.getChild().getClass().equals(DroneButton.class)) {
                     DroneButton droneButton = (DroneButton) ce.getChild();
                     Drone drone = droneButton.getDrone();
 
+                    // Add property change listener to droneButton drone
                     drone.addPropertyChangeListener((PropertyChangeEvent pce) -> {
+                        // If location change
                         if (pce.getPropertyName().equals("location")) {
                             Point location = (Point) pce.getNewValue();
+                            // Check out of [0, 10]
                             if (location.getX() < 0 || location.getY() < 0 || location.getX() > Drone.maxX || location.getY() > Drone.maxY) {
+                                // Create and fire event
                                 OutOfRangeEvent evt = new OutOfRangeEvent(droneButton, location.getX(), location.getY());
                                 fireEvents(evt);
                             }

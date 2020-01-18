@@ -47,7 +47,7 @@ public class Drone implements Serializable, OutOfRangeListener {
         this.timer = new Timer();
         this.setFlying(true);
         this.setLocation(initLoc);
-        this.timer.schedule(new DroneTask(this), 0, 100);
+        this.timer.schedule(new DroneTask(this), 0, 100); // Faster is Funnier
     }
 
     /**

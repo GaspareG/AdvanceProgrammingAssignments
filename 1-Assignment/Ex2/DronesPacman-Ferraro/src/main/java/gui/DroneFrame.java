@@ -72,7 +72,7 @@ public class DroneFrame extends javax.swing.JFrame {
         DroneButton droneButton = new DroneButton(pnlDrones);
 
         pnlDrones.addOutOfRangeListener(droneButton.getDrone());
-        
+
         pnlDrones.add(droneButton);
         pnlDrones.revalidate();
         pnlDrones.repaint();
