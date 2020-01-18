@@ -5,22 +5,41 @@
  */
 package gui;
 
-import java.beans.PropertyChangeEvent;
+import event.OutOfRangeEvent;
+import event.OutOfRangeListener;
+import java.awt.event.ComponentListener;
 import javax.swing.JPanel;
-import java.beans.PropertyChangeListener;
+import javax.swing.event.EventListenerList;
 
 /**
  *
  * @author gaspare
  */
+public class DronePanel extends JPanel {
 
-public class DronePanel extends JPanel implements PropertyChangeListener  {
-    
-    @Override
-    public void propertyChange(PropertyChangeEvent pce) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    protected EventListenerList listenerList;
+
+    public DronePanel() {
+        this.listenerList = new EventListenerList();
+
+        this.addComponentListener((ComponentListener) this);
+    }
+
+    public void addOutOfRangeListener(OutOfRangeListener listener) {
+        listenerList.add(OutOfRangeListener.class, listener);
+    }
+
+    public void removeOutOfRangeListener(OutOfRangeListener listener) {
+        listenerList.remove(OutOfRangeListener.class, listener);
+    }
+
+    private void fireEvents(OutOfRangeEvent evt) {
+        Object[] listeners = listenerList.getListenerList();
+        for (int i = 0; i < listeners.length; i = i + 2) {
+            if (listeners[i] == OutOfRangeListener.class) {
+                ((OutOfRangeListener) listeners[i + 1]).OutOfRange(evt);
+            }
+        }
     }
 
 }
-
-

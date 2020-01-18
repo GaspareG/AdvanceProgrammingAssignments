@@ -38,6 +38,7 @@ public class DroneFrame extends javax.swing.JFrame implements VetoableChangeList
         btnAdd = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("DronesPlus-Ferraro");
         setMaximumSize(new java.awt.Dimension(900, 900));
         setMinimumSize(new java.awt.Dimension(900, 900));
         setPreferredSize(new java.awt.Dimension(900, 900));

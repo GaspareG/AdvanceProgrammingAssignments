@@ -27,14 +27,18 @@ public class DroneFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnlDrones = new javax.swing.JPanel();
+        pnlDrones = new gui.DronePanel();
         btnAdd = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("DronesPacman-Ferraro");
+        setMaximumSize(new java.awt.Dimension(900, 900));
+        setMinimumSize(new java.awt.Dimension(900, 900));
+        setPreferredSize(new java.awt.Dimension(900, 900));
+        setResizable(false);
 
-        pnlDrones.setMaximumSize(new java.awt.Dimension(250, 250));
-        pnlDrones.setMinimumSize(new java.awt.Dimension(250, 250));
-        pnlDrones.setPreferredSize(new java.awt.Dimension(300, 300));
+        pnlDrones.setMaximumSize(new java.awt.Dimension(850, 850));
+        pnlDrones.setMinimumSize(new java.awt.Dimension(850, 850));
         pnlDrones.setLayout(null);
 
         btnAdd.setText("New pacman drone");
@@ -47,34 +51,31 @@ public class DroneFrame extends javax.swing.JFrame {
             }
         });
         pnlDrones.add(btnAdd);
-        btnAdd.setBounds(50, 275, 200, 25);
+        btnAdd.setBounds(325, 800, 200, 25);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlDrones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(pnlDrones, javax.swing.GroupLayout.PREFERRED_SIZE, 850, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlDrones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(pnlDrones, javax.swing.GroupLayout.PREFERRED_SIZE, 850, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         DroneButton droneButton = new DroneButton(pnlDrones);
+
+        pnlDrones.addOutOfRangeListener(droneButton.getDrone());
         
         pnlDrones.add(droneButton);
         pnlDrones.revalidate();
-        pnlDrones.repaint();        
+        pnlDrones.repaint();
     }//GEN-LAST:event_btnAddActionPerformed
 
     /**
@@ -105,15 +106,13 @@ public class DroneFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DroneFrame().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new DroneFrame().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JPanel pnlDrones;
+    private gui.DronePanel pnlDrones;
     // End of variables declaration//GEN-END:variables
 }
