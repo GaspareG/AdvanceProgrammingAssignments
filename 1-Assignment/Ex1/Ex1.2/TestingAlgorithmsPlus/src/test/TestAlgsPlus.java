@@ -1,6 +1,6 @@
-package Test;
+package test;
 
-import Registry.KeyRegistry;
+import registry.KeyRegistry;
 
 import java.io.*;
 import java.lang.reflect.Constructor;
@@ -34,14 +34,18 @@ public class TestAlgsPlus {
   private static final String PATH_KEY_LIST = "crypto/keys.list";
   private static final String PATH_CRYPTO_ALGOS = "crypto/algos";
 
-  public static void main(String[] args) {
+  private static final String PREFIX_ENC = "enc";
+  private static final String PREFIX_DEC = "dec";
+  private static final String SUFFIX_CLASS = ".class";
+
+  public static void main(String[] args) throws Exception {
 
     String PATH_BASE;
+    // PATH_BASE = "/home/gaspare/git/AdvanceProgrammingAssignments/1-Assignment/Ex1/";
 
-    if (args.length == 0) {
-      PATH_BASE = "/home/gaspare/git/AdvanceProgrammingAssignments/1-Assignment/Ex1/";
-      // throw new Exception("Please specify a parent directory");
-    } else
+    if (args.length == 0)
+      throw new Exception("Please specify a parent directory");
+    else
       PATH_BASE = args[0];
 
     if (!PATH_BASE.endsWith("/"))
@@ -72,7 +76,7 @@ public class TestAlgsPlus {
           // Filter only regular files
           .filter(Files::isRegularFile)
           // And filter only .class files
-          .filter(path -> path.toString().endsWith(".class"))
+          .filter(path -> path.toString().endsWith(SUFFIX_CLASS))
           // For each .class file check it
           .forEach(path -> TestAlgsPlus.checkClass(path, classLoader, registry, packageName, secretLines, encryptionAnnotation, decryptionAnnotation));
     } catch (IOException | ClassNotFoundException e) {
@@ -92,7 +96,7 @@ public class TestAlgsPlus {
     try {
 
       // Load specified class
-      String fileName = path.getFileName().toString().replace(".class", "");
+      String fileName = path.getFileName().toString().replace(SUFFIX_CLASS, "");
       String classPackage = packageName.concat(fileName);
       Class loaded = classLoader.loadClass(classPackage);
 
@@ -136,8 +140,8 @@ public class TestAlgsPlus {
         decryption = getMethodsAnnotated(loaded, decryptionAnnotation).get(0);
       } else {
         // Retrieve methods using name
-        encryption = getMethodsStartWith(loaded, "enc").get(0);
-        decryption = getMethodsStartWith(loaded, "dec").get(0);
+        encryption = getMethodsStartWith(loaded, PREFIX_ENC).get(0);
+        decryption = getMethodsStartWith(loaded, PREFIX_DEC).get(0);
       }
 
       // For each secret word
@@ -249,10 +253,10 @@ public class TestAlgsPlus {
    */
   private static boolean hasMethods(Class toVerify) {
     // A method starting with enc
-    boolean checkEncryption = getMethodsStartWith(toVerify, "enc").size() == 1;
+    boolean checkEncryption = getMethodsStartWith(toVerify, PREFIX_ENC).size() == 1;
 
     // A method starting with dec
-    boolean checkDecryption = getMethodsStartWith(toVerify, "dec").size() == 1;
+    boolean checkDecryption = getMethodsStartWith(toVerify, PREFIX_DEC).size() == 1;
 
     return checkEncryption && checkDecryption;
   }
@@ -294,7 +298,7 @@ public class TestAlgsPlus {
    */
   private static List<Method> getMethodsAnnotated(Class toVerify, Class annotation) {
     // Stream with all the class methods
-    return Arrays.stream(toVerify.getMethods())
+    return (List<Method>) Arrays.stream(toVerify.getMethods())
         // Filter only methods with one parameter
         .filter(m -> m.getParameterCount() == 1)
         // Filter only methods with string parameter

@@ -1,15 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="TestingAlgorithmsPlus:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="b9089599-1ec5-4767-95bf-b35e35b057d7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../Ex1.1/TestingAlgorithms/.idea/artifacts/TestingAlgorithms_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Ex1.1/TestingAlgorithms/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Ex1.1/TestingAlgorithms/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Ex1.1/TestingAlgorithms/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/TestingAlgorithmsPlus_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Ex1.1/TestingAlgorithms/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Ex1.1/TestingAlgorithms/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Ex1.1/TestingAlgorithms/src/Registry/KeyRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Ex1.1/TestingAlgorithms/src/registry/KeyRegistry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Ex1.1/TestingAlgorithms/src/Test/TestAlgs.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Ex1.1/TestingAlgorithms/src/test/TestAlgs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Test/TestAlgsPlus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Test/TestAlgsPlus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Registry/KeyRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/registry/KeyRegistry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Test/TestAlgsPlus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TestAlgsPlus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Ex2/Drones-Ferraro/src/main/java/utility/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Ex2/Drones-Ferraro/src/main/java/utility/Point.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Ex2/DronesPacman-Ferraro/src/main/java/utility/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Ex2/DronesPacman-Ferraro/src/main/java/utility/Point.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Ex2/DronesPlus-Ferraro/src/main/java/utility/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Ex2/DronesPlus-Ferraro/src/main/java/utility/Point.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../2-Assignment/Part2/MapReduce-Ferraro/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../2-Assignment/Part2/MapReduce-Ferraro/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../2-Assignment/Part3/benchmark.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../2-Assignment/Part3/benchmark.py" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -21,15 +46,30 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
   </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
   <component name="ProjectId" id="1W7bw04kBZJbeKR5C74QaLxihhP" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="GenerateAntBuildDialog.backupFiles" value="true" />
+    <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
+    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
+    <property name="GenerateAntBuildDialog.outputFileNameProperty" value="testingalgorithmsplus" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
@@ -38,25 +78,13 @@
       <recent name="Registry" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="RunManager">
     <configuration name="TestAlgsPlus" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Test.TestAlgsPlus" />
+      <option name="MAIN_CLASS_NAME" value="test.TestAlgsPlus" />
       <module name="TestingAlgorithmsPlus" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Test.*" />
+          <option name="PATTERN" value="test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -69,6 +97,18 @@
         <item itemvalue="Application.TestAlgsPlus" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -84,6 +124,9 @@
       <workItem from="1578728898458" duration="13000" />
       <workItem from="1578768978985" duration="2006000" />
       <workItem from="1578816509630" duration="2566000" />
+      <workItem from="1579281733749" duration="2312000" />
+      <workItem from="1579302063561" duration="1350000" />
+      <workItem from="1579340169599" duration="2682000" />
     </task>
     <servers />
   </component>
@@ -102,5 +145,43 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="710" y="1474" width="525" height="430" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1579282059029">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state x="710" y="1474" width="525" height="430" key="#com.intellij.ide.util.TreeClassChooserDialog/0.1080.1920.1080/48.0.1872.1080/1920.0.1080.1920@0.1080.1920.1080" timestamp="1579282059029" />
+    <state x="825" y="1526" width="307" height="214" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1579281742105">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state x="825" y="1526" width="307" height="214" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.1080.1920.1080/48.0.1872.1080/1920.0.1080.1920@0.1080.1920.1080" timestamp="1579281742105" />
+    <state x="717" y="1381" width="524" height="504" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1579282866101">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state x="717" y="1381" width="524" height="504" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.1080.1920.1080/48.0.1872.1080/1920.0.1080.1920@0.1080.1920.1080" timestamp="1579282866101" />
+    <state x="760" y="1448" width="424" height="482" key="FileChooserDialogImpl" timestamp="1579281966303">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state x="760" y="1448" width="424" height="482" key="FileChooserDialogImpl/0.1080.1920.1080/48.0.1872.1080/1920.0.1080.1920@0.1080.1920.1080" timestamp="1579281966303" />
+    <state width="1822" height="275" key="GridCell.Tab.0.bottom" timestamp="1579346537972">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state width="1822" height="275" key="GridCell.Tab.0.bottom/0.1080.1920.1080/48.0.1872.1080/1920.0.1080.1920@0.1080.1920.1080" timestamp="1579346537972" />
+    <state width="1822" height="275" key="GridCell.Tab.0.center" timestamp="1579346537972">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state width="1822" height="275" key="GridCell.Tab.0.center/0.1080.1920.1080/48.0.1872.1080/1920.0.1080.1920@0.1080.1920.1080" timestamp="1579346537972" />
+    <state width="1822" height="275" key="GridCell.Tab.0.left" timestamp="1579346537972">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state width="1822" height="275" key="GridCell.Tab.0.left/0.1080.1920.1080/48.0.1872.1080/1920.0.1080.1920@0.1080.1920.1080" timestamp="1579346537972" />
+    <state width="1822" height="275" key="GridCell.Tab.0.right" timestamp="1579346537972">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state width="1822" height="275" key="GridCell.Tab.0.right/0.1080.1920.1080/48.0.1872.1080/1920.0.1080.1920@0.1080.1920.1080" timestamp="1579346537972" />
+    <state x="465" y="1269" width="1024" height="843" key="SettingsEditor" timestamp="1579346178384">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state x="465" y="1269" width="1024" height="843" key="SettingsEditor/0.1080.1920.1080/48.0.1872.1080/1920.0.1080.1920@0.1080.1920.1080" timestamp="1579346178384" />
   </component>
 </project>

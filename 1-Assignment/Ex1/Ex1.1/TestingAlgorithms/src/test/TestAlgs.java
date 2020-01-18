@@ -1,6 +1,6 @@
-package Test;
+package test;
 
-import Registry.KeyRegistry;
+import registry.KeyRegistry;
 
 import java.io.*;
 import java.lang.reflect.Constructor;
@@ -33,14 +33,18 @@ public class TestAlgs {
   private static final String PATH_KEY_LIST = "crypto/keys.list";
   private static final String PATH_CRYPTO_ALGOS = "crypto/algos";
 
+  private static final String PREFIX_ENC = "enc";
+  private static final String PREFIX_DEC = "dec";
+  private static final String SUFFIX_CLASS = ".class";
+
   public static void main(String[] args) throws Exception {
 
     String PATH_BASE;
+    // PATH_BASE = "/home/gaspare/git/AdvanceProgrammingAssignments/1-Assignment/Ex1/";
 
-    if (args.length == 0) {
-      PATH_BASE = "/home/gaspare/git/AdvanceProgrammingAssignments/1-Assignment/Ex1/";
-      // throw new Exception("Please specify a parent directory");
-    } else
+    if (args.length == 0)
+      throw new Exception("Please specify a parent directory");
+    else
       PATH_BASE = args[0];
 
     if (!PATH_BASE.endsWith("/"))
@@ -66,7 +70,7 @@ public class TestAlgs {
           // Filter only regular files
           .filter(Files::isRegularFile)
           // And filter only .class files
-          .filter(path -> path.toString().endsWith(".class"))
+          .filter(path -> path.toString().endsWith(SUFFIX_CLASS))
           // For each .class file check it
           .forEach(path -> TestAlgs.checkClass(path, classLoader, registry, packageName, secretLines));
     } catch (IOException e) {
@@ -86,7 +90,7 @@ public class TestAlgs {
     try {
 
       // Load specified class
-      String fileName = path.getFileName().toString().replace(".class", "");
+      String fileName = path.getFileName().toString().replace(SUFFIX_CLASS, "");
       String classPackage = packageName.concat(fileName);
       Class loaded = classLoader.loadClass(classPackage);
 
@@ -121,8 +125,8 @@ public class TestAlgs {
       Object crypto = constructor.newInstance(key);
 
       // Get encryption and decryption methods
-      Method encryption = getMethodsStartWith(loaded, "enc").get(0);
-      Method decryption = getMethodsStartWith(loaded, "dec").get(0);
+      Method encryption = getMethodsStartWith(loaded, PREFIX_ENC).get(0);
+      Method decryption = getMethodsStartWith(loaded, PREFIX_DEC).get(0);
 
       for (String w : secret) {
 
@@ -186,14 +190,15 @@ public class TestAlgs {
     for (String line : keyLines) {
       // Get pair <class, key> from  line
       String[] classKey = line.split(" ");
-      String className = classKey[0];
-      String key = classKey[1];
 
       try {
+        String className = classKey[0];
+        String key = classKey[1];
+
         // Try to load class and add to the KeyRegistry
         Class toAdd = classLoader.loadClass(className);
         registry.add(toAdd, key);
-      } catch (ClassNotFoundException e) {
+      } catch (ClassNotFoundException | IndexOutOfBoundsException e) {
         e.printStackTrace();
       }
     }
@@ -216,10 +221,11 @@ public class TestAlgs {
     boolean checkConstructor = hasStringConstructor(toVerify);
 
     // A method starting with enc
-    boolean checkEncryption = getMethodsStartWith(toVerify, "enc").size() == 1;
+    boolean checkEncryption = getMethodsStartWith(toVerify, PREFIX_ENC).size() == 1;
 
     // A method starting with dec
-    boolean checkDecryption = getMethodsStartWith(toVerify, "dec").size() == 1;
+    boolean checkDecryption = getMethodsStartWith(toVerify, PREFIX_DEC).size() == 1;
+
     return checkConstructor && checkEncryption && checkDecryption;
   }
 
