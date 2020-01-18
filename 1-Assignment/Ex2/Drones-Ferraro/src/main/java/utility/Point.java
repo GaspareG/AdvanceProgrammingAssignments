@@ -2,7 +2,7 @@ package utility;
 
 /**
  * Class that define a 2D integer-coordinates point
- * @author gaspare
+ * @author Gaspare Ferraro - 520549 - <ferraro@gaspa.re>
  */
 public class Point {
     
@@ -16,7 +16,7 @@ public class Point {
     {
         this(0, 0);
     }
-    
+       
     /**
      * Constructor, create a point in (x, y)
      * @param x x-coordinate

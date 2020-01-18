@@ -99,5 +99,6 @@ public class Drone implements Serializable {
             drone.setRandomLocation();
         }
     }
+
     
 }

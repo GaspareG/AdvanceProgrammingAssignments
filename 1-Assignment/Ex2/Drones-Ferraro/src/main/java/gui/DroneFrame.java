@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
 /**
  *
- * @author gaspare
+ * @author Gaspare Ferraro - 520549 - <ferraro@gaspa.re>
  */
 public class DroneFrame extends javax.swing.JFrame {
 
@@ -31,23 +26,30 @@ public class DroneFrame extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(900, 900));
+        setMinimumSize(new java.awt.Dimension(900, 900));
+        setPreferredSize(new java.awt.Dimension(900, 900));
+        setResizable(false);
 
-        pnlDrones.setMaximumSize(new java.awt.Dimension(250, 250));
-        pnlDrones.setMinimumSize(new java.awt.Dimension(250, 250));
-        pnlDrones.setPreferredSize(new java.awt.Dimension(300, 300));
+        pnlDrones.setMaximumSize(new java.awt.Dimension(850, 850));
+        pnlDrones.setMinimumSize(new java.awt.Dimension(850, 850));
+        pnlDrones.setPreferredSize(new java.awt.Dimension(850, 850));
         pnlDrones.setLayout(null);
 
         btnAdd.setText("New drone");
-        btnAdd.setMaximumSize(new java.awt.Dimension(120, 25));
-        btnAdd.setMinimumSize(new java.awt.Dimension(120, 25));
-        btnAdd.setPreferredSize(new java.awt.Dimension(120, 25));
+        btnAdd.setAlignmentX(0.5F);
+        btnAdd.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAdd.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnAdd.setMaximumSize(new java.awt.Dimension(150, 25));
+        btnAdd.setMinimumSize(new java.awt.Dimension(150, 25));
+        btnAdd.setPreferredSize(new java.awt.Dimension(150, 25));
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
             }
         });
         pnlDrones.add(btnAdd);
-        btnAdd.setBounds(90, 275, 120, 25);
+        btnAdd.setBounds(350, 825, 150, 25);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,10 +107,8 @@ public class DroneFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DroneFrame().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new DroneFrame().setVisible(true);
         });
     }
 

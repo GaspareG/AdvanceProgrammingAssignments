@@ -5,6 +5,8 @@
  */
 package gui;
 
+import static gui.DroneButton.LABEL_HEIGHT;
+import static gui.DroneButton.LABEL_WIDTH;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyVetoException;
 import java.beans.VetoableChangeListener;
@@ -36,23 +38,28 @@ public class DroneFrame extends javax.swing.JFrame implements VetoableChangeList
         btnAdd = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(900, 900));
+        setMinimumSize(new java.awt.Dimension(900, 900));
+        setPreferredSize(new java.awt.Dimension(900, 900));
+        setResizable(false);
 
-        pnlDrones.setMaximumSize(new java.awt.Dimension(250, 250));
-        pnlDrones.setMinimumSize(new java.awt.Dimension(250, 250));
-        pnlDrones.setPreferredSize(new java.awt.Dimension(300, 300));
+        pnlDrones.setMaximumSize(new java.awt.Dimension(850, 850));
+        pnlDrones.setMinimumSize(new java.awt.Dimension(850, 850));
+        pnlDrones.setPreferredSize(new java.awt.Dimension(850, 850));
         pnlDrones.setLayout(null);
 
         btnAdd.setText("New drone");
-        btnAdd.setMaximumSize(new java.awt.Dimension(120, 25));
-        btnAdd.setMinimumSize(new java.awt.Dimension(120, 25));
-        btnAdd.setPreferredSize(new java.awt.Dimension(120, 25));
+        btnAdd.setMargin(null);
+        btnAdd.setMaximumSize(new java.awt.Dimension(150, 25));
+        btnAdd.setMinimumSize(new java.awt.Dimension(150, 25));
+        btnAdd.setPreferredSize(new java.awt.Dimension(150, 25));
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
             }
         });
         pnlDrones.add(btnAdd);
-        btnAdd.setBounds(90, 275, 120, 25);
+        btnAdd.setBounds(350, 825, 150, 25);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,15 +130,26 @@ public class DroneFrame extends javax.swing.JFrame implements VetoableChangeList
     private javax.swing.JPanel pnlDrones;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Check if new location is in panel bound
+     * @param pce PropertyChangeEvent
+     * @throws PropertyVetoException
+     */
     @Override
     public void vetoableChange(PropertyChangeEvent pce) throws PropertyVetoException {
         if(pce.getPropertyName() != null && pce.getPropertyName().equals("location") )
         {
-            Point newLocation = (Point) pce.getNewValue();
+            Point location = (Point) pce.getNewValue();
+                    
+            int x = location.getX()*LABEL_WIDTH;
+            int y = location.getY()*LABEL_HEIGHT;
+
+            System.out.println("VETO CHECK " + x + " " + y);
             
-            if(!pnlDrones.contains(newLocation.getX(), newLocation.getY()))
+            // If starting or ending points are not both in panel, throws veto
+            if(!pnlDrones.contains(x, y) || !pnlDrones.contains(x+LABEL_WIDTH, y+LABEL_HEIGHT))
             {
-                throw new PropertyVetoException("Location ("+newLocation.getX() + " " + newLocation.getY()+") out of bounds", pce);
+                throw new PropertyVetoException("Location ("+location.getX() + " " + location.getY()+") out of bounds", pce);
             }
         }
     }

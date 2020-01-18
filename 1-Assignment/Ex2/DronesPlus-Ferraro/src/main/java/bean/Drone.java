@@ -8,7 +8,7 @@ import java.util.TimerTask;
 import utility.Point;
 
 /**
- *
+ * Java bean Drone
  * @author Gaspare Ferraro - 520549 - <ferraro@gaspa.re>
  */
 public class Drone implements Serializable {
@@ -20,12 +20,15 @@ public class Drone implements Serializable {
     private Timer timer;
     
     // Grid constraint
-    private final int scale = 25;
     private final int minX = -10;
     private final int minY = -10;
     private final int maxX = +10;
     private final int maxY = +10;
     
+    /**
+     * Default empty constructor
+     * Create a non-flying drone located in (0,0)
+     */
     public Drone()
     {
         this.propertySupport = new PropertyChangeSupport(this);
@@ -34,6 +37,10 @@ public class Drone implements Serializable {
         this.setLocation(new Point(0,0));
     }
 
+    /**
+     * Start drone
+     * @param initLoc Initial drone location
+     */
     public void takeOff(Point initLoc)
     {
         this.timer = new Timer();
@@ -48,6 +55,9 @@ public class Drone implements Serializable {
         this.timer.schedule(new DroneTask(this), 0, 1000);
     }
     
+    /**
+     * Stop drone and cancel timer 
+     */
     public void land()
     {
         timer.cancel();
@@ -56,64 +66,95 @@ public class Drone implements Serializable {
     
     private void setLocation(Point loc)
     {
+        // Fire evento "location" (old position, new position)
         this.propertySupport.firePropertyChange("location", this.getLocation(), loc);
         this.loc = loc;
     }
     
+    /**
+     * Getter method for drone location
+     * @return Point object, current location of the drone
+     */
     public Point getLocation()
     {
         return this.loc;
     }
-        
+    
     private void setFlying(boolean flying)
     {
+        // Fire evento "flying" (old status, new status)
         this.propertySupport.firePropertyChange("flying", this.getFlying(), flying);
         this.flying = flying;
     }
     
+    /**
+     * Getter method for flying
+     * @return Boolean, current flying status of the drone
+     */
     public boolean getFlying()
     {
         return this.flying;
     }
     
-    public void addVetoableChangeListener(VetoableChangeListener listener)
-    {
-        this.vetos.addVetoableChangeListener(listener);
-    }
-    
-    public void removeVetoableChangeListener(VetoableChangeListener listener)
-    {
-        this.vetos.removeVetoableChangeListener(listener);
-    }
-    
+    /**
+     * Add listener to the property support
+     * @param listener PropertyChangeListener to add
+     */
     public void addPropertyChangeListener(PropertyChangeListener listener)
     {
         this.propertySupport.addPropertyChangeListener(listener);
     }
     
+    /**
+     * Remove listener to the property support
+     * @param listener PropertyChangeListener to remove
+     */
     public void removePropertyChangeListener(PropertyChangeListener listener)
     {
         this.propertySupport.removePropertyChangeListener(listener);
     }
 
+    /**
+     * Add listener to the vetoable change support
+     * @param listener VetoableChangeListener to add
+     */
+    public void addVetoableChangeListener(VetoableChangeListener listener)
+    {
+        this.vetos.addVetoableChangeListener(listener);
+    }
+    
+    /**
+     * Remove listener to the vetoable change support
+     * @param listener VetoableChangeListener to remove
+     */
+    public void removeVetoableChangeListener(VetoableChangeListener listener)
+    {
+        this.vetos.removeVetoableChangeListener(listener);
+    }
+    
     private void setRandomLocation() {
+        
         Random rand = new Random();
+        // Generate a x coordinate in [minX, maxX]
         int x = rand.nextInt(maxX-minX+1)+minX;
+        // Generate a y coordinate in [minY, maxY]
         int y = rand.nextInt(maxY-minY+1)+minY;
-
-        x *= scale;
-        y *= scale;
         
         Point newLocation = new Point(x, y);
+        
+        System.out.println("PROVA " + x + " " + y);
         try {
             this.vetos.fireVetoableChange("location", this.getLocation(), newLocation);
             this.setLocation(newLocation);
+            System.out.println("YES " + this.getLocation());
         } catch (PropertyVetoException ex) {  
+            System.out.println("NO " + this.getLocation());
             
         }
         
     }
 
+    // Timer task, at every run generate a new location
     private static class DroneTask extends TimerTask {
 
         private final Drone drone;
@@ -128,6 +169,11 @@ public class Drone implements Serializable {
         }
     }
     
+    /**
+     * String representation of the drone
+     * @return Return ">x,y<" if the drone is flying, and "<x,y>" otherwise
+     */
+    @Override
     public String toString()
     {
         StringBuilder builder = new StringBuilder();
@@ -138,7 +184,8 @@ public class Drone implements Serializable {
         builder.append(this.getLocation().getY());
         builder.append(this.getFlying() ? "<" : ">");
         builder.append(" ");
-        
+
         return builder.toString();
     }
+    
 }
