@@ -2,6 +2,7 @@ package bean;
 
 import event.OutOfRangeEvent;
 import event.OutOfRangeListener;
+import gui.DroneButton;
 import java.beans.*;
 import java.io.Serializable;
 import java.util.Random;
@@ -23,10 +24,10 @@ public class Drone implements Serializable, OutOfRangeListener {
     private Point loc;
 
     // Grid constraint
-    private final int minX = -10;
-    private final int minY = -10;
-    private final int maxX = +10;
-    private final int maxY = +10;
+    public static int minX = -10;
+    public static int minY = -10;
+    public static int maxX = +10;
+    public static int maxY = +10;
 
     /**
      * Default empty constructor Create a non-flying drone located in (0,0)
@@ -46,7 +47,7 @@ public class Drone implements Serializable, OutOfRangeListener {
         this.timer = new Timer();
         this.setFlying(true);
         this.setLocation(initLoc);
-        this.timer.schedule(new DroneTask(this), 0, 1000);
+        this.timer.schedule(new DroneTask(this), 0, 100);
     }
 
     /**
@@ -59,8 +60,9 @@ public class Drone implements Serializable, OutOfRangeListener {
 
     private void setLocation(Point loc) {
         // Fire evento "location" (old position, new position)
-        this.propertySupport.firePropertyChange("location", this.getLocation(), loc);
+        Point oldLocation = this.getLocation();
         this.loc = loc;
+        this.propertySupport.firePropertyChange("location", oldLocation, this.getLocation());
     }
 
     /**
@@ -108,8 +110,24 @@ public class Drone implements Serializable, OutOfRangeListener {
     private void setRandomLocation() {
         Random rand = new Random();
         // Generate 
-        int deltaX = rand.nextInt() % 2 == 0 ? +1 : -1;
-        int deltaY = rand.nextInt() % 2 == 0 ? +1 : -1;
+        int deltaX = 0;
+        int deltaY = 0;
+
+        switch (rand.nextInt() % 4) {
+            case 0:
+                deltaX = 1;
+                break;
+            case 1:
+                deltaX = -1;
+                break;
+            case 2:
+                deltaY = 1;
+                break;
+            case 3:
+            default:
+                deltaY = -1;
+                break;
+        }
 
         int x = this.getLocation().getX() + deltaX;
         int y = this.getLocation().getY() + deltaY;
@@ -157,8 +175,24 @@ public class Drone implements Serializable, OutOfRangeListener {
         int y = evt.getY();
 
         System.out.println("OUT OF RANGE " + x + " " + y);
-        
-        
+
+        if (x < 0) {
+            x = Drone.maxX;
+        }
+        if (y < 0) {
+            y = Drone.maxY;
+        }
+        if (x > Drone.maxX) {
+            x = 0;
+        }
+        if (y > Drone.maxY) {
+            y = 0;
+        }
+
+        this.setLocation(new Point(x, y));
+
+        DroneButton droneButton = (DroneButton) evt.getSource();
+        droneButton.updateLocation();
 
     }
 

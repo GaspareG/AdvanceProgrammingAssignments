@@ -1,7 +1,7 @@
 package gui;
 
 import bean.Drone;
-import event.OutOfRangeListener;
+import event.OutOfRangeEvent;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
@@ -93,7 +93,7 @@ public class DroneButton extends JLabel implements PropertyChangeListener {
         this.setForeground(new Color(r, g, b));
     }
 
-    private void updateLocation() {
+    public void updateLocation() {
 
         Point location = this.drone.getLocation();
 

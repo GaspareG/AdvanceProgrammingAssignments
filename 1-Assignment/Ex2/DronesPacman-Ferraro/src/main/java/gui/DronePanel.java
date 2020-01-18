@@ -5,11 +5,18 @@
  */
 package gui;
 
+import bean.Drone;
 import event.OutOfRangeEvent;
 import event.OutOfRangeListener;
-import java.awt.event.ComponentListener;
+import java.awt.event.ContainerEvent;
+import java.awt.event.ContainerListener;
+import java.awt.event.HierarchyBoundsListener;
+import java.awt.event.HierarchyEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import javax.swing.JPanel;
 import javax.swing.event.EventListenerList;
+import utility.Point;
 
 /**
  *
@@ -22,7 +29,33 @@ public class DronePanel extends JPanel {
     public DronePanel() {
         this.listenerList = new EventListenerList();
 
-        this.addComponentListener((ComponentListener) this);
+        // I've tried everythings, that's the only "beatiful" thing that works
+        this.addContainerListener(new ContainerListener() {
+            @Override
+            public void componentAdded(ContainerEvent ce) {
+                if (ce.getChild().getClass().equals(DroneButton.class)) {
+                    DroneButton droneButton = (DroneButton) ce.getChild();
+                    Drone drone = droneButton.getDrone();
+
+                    drone.addPropertyChangeListener((PropertyChangeEvent pce) -> {
+                        if (pce.getPropertyName().equals("location")) {
+                            Point location = (Point) pce.getNewValue();
+                            if (location.getX() < 0 || location.getY() < 0 || location.getX() > Drone.maxX || location.getY() > Drone.maxY) {
+                                OutOfRangeEvent evt = new OutOfRangeEvent(droneButton, location.getX(), location.getY());
+                                fireEvents(evt);
+                            }
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void componentRemoved(ContainerEvent ce) {
+
+            }
+
+        });
+
     }
 
     public void addOutOfRangeListener(OutOfRangeListener listener) {
