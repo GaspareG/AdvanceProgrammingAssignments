@@ -1,5 +1,13 @@
 package utility;
 
+/*
+  Exam: Advance Programming
+  Year: 2019/2020
+  Author: Gaspare Ferraro
+  Mail: ferraro@gaspa.re
+  Mat: 520549
+*/
+
 public class Pair<T1, T2> {
   T1 key;
   T2 value;

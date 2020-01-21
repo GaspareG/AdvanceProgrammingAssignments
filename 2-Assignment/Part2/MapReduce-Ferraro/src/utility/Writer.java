@@ -6,6 +6,14 @@ import java.io.PrintStream;
 import java.util.Comparator;
 import java.util.stream.Stream;
 
+/*
+  Exam: Advance Programming
+  Year: 2019/2020
+  Author: Gaspare Ferraro
+  Mail: ferraro@gaspa.re
+  Mat: 520549
+*/
+
 public class Writer {
 
   public static void write(File dst, Stream<Pair<String, Integer>> res) throws FileNotFoundException {

@@ -7,6 +7,15 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/*
+  Exam: Advance Programming
+  Year: 2019/2020
+  Author: Gaspare Ferraro
+  Mail: ferraro@gaspa.re
+  Mat: 520549
+*/
+
+
 public class Reader {
 
   private final Path rootPath;
@@ -20,7 +29,7 @@ public class Reader {
     return paths.stream()
         .filter(Files::isRegularFile)
         .filter(path -> path.getFileName().toString().endsWith(".txt"))
-        .map(path -> new Pair<String, List<String>>(path.getFileName().toString(),
+        .map(path -> new Pair<>(path.getFileName().toString(),
             myReadAllLines(path)));
   }
 
