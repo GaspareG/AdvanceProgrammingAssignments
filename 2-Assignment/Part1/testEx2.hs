@@ -20,7 +20,7 @@ testMaximum = TestCase $ assertEqual "maximum (fromList \"abcdaad\") == 'd'" (ma
 testMinimum = TestCase $ assertEqual "minimum (fromList \"abcdaad\") == 'a'" (minimum (fromList "abcdaad")) 'a'
 
 -- mapLB
-testMapLB = TestCase $ assertEqual "mapLB (\x -> mod 2 x) (fromList [1,2,1,2,2,2,1,1,1,1,2,2,3,3,3,4,4]) == LB [(1,9),(0,8)]" (mapLB (\x -> mod 2 x) (fromList [1,2,1,2,2,2,1,1,1,1,2,2,3,3,3,4,4])) (LB [(1,9),(0,8)])
+testMapLB = TestCase $ assertEqual "mapLB (\\x -> mod x 2) (fromList [1,2,1,2,2,2,1,1,1,1,2,2,3,3,3,4,4]) == LB [(1,9),(0,8)]" (mapLB (\x -> mod x 2) (fromList [1,2,1,2,2,2,1,1,1,1,2,2,3,3,3,4,4])) (LB [(1,9),(0,8)])
 
 testlist = TestList [TestLabel "testFoldl" testFoldl,
                      TestLabel "testFoldr" testFoldr,
@@ -29,7 +29,8 @@ testlist = TestList [TestLabel "testFoldl" testFoldl,
                      TestLabel "testElemTrue" testElemTrue,
                      TestLabel "testElemFalse" testElemFalse,
                      TestLabel "testMaximum" testMaximum,
-                     TestLabel "testMinimum" testMinimum
+                     TestLabel "testMinimum" testMinimum,
+                     TestLabel "testMapLB" testMapLB
                      ]
 
 
