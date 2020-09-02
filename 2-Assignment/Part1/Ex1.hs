@@ -75,4 +75,3 @@ toList (LB ((k, v):xs)) = (replicate v k) ++ toList (LB xs)
 -- sumBag bag bag', returning the ListBag obtained by adding all the elements of bag' to bag
 sumBag :: Eq a => ListBag a -> ListBag a -> ListBag a
 sumBag (LB x) (LB y) = fromList ((toList (LB x)) ++ (toList (LB y)))
-

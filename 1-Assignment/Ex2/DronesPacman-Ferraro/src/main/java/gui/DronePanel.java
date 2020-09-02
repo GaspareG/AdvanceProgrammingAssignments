@@ -27,7 +27,7 @@ public class DronePanel extends JPanel {
     public DronePanel() {
         this.listenerList = new EventListenerList();
 
-        // I've tried everythings, that's the only "beatiful" thing that works
+        // I've tried everythings, that's the only "beautiful" thing that works
         this.addContainerListener(new ContainerListener() {
 
             // Detect new component added to panel
