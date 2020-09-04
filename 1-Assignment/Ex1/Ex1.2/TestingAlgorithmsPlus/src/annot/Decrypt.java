@@ -1,4 +1,4 @@
-package test;
+package annot;
 
 /*
   Exam: Advance Programming
